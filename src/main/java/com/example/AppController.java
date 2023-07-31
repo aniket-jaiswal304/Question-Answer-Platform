@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.company.service.CompanyService;
 import com.example.model.*;
 import com.example.service.*;
 import org.springframework.beans.factory.annotation.Autowired;

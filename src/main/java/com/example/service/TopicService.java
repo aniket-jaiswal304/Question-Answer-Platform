@@ -1,10 +1,8 @@
 package com.example.service;
 
 import com.example.dao.TopicDaoI;
-import com.example.entity.Company;
 import com.example.entity.Subtopic;
 import com.example.entity.Topic;
-import com.example.model.CompanyInfo;
 import com.example.model.SubtopicInfo;
 import com.example.model.TopicInfo;
 import org.springframework.beans.factory.annotation.Autowired;

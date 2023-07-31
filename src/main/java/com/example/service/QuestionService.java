@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.company.model.Company;
 import com.example.dao.*;
 import com.example.entity.*;
 import com.example.model.*;
