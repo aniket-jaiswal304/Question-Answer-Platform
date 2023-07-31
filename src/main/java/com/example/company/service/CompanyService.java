@@ -1,6 +1,5 @@
 package com.example.company.service;
 
-import com.example.dao.CompanyDaoI;
 import com.example.company.model.Company;
 import com.example.model.CompanyInfo;
 import org.springframework.beans.factory.annotation.Autowired;

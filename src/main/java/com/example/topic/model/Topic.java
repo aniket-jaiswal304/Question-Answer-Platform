@@ -1,4 +1,6 @@
-package com.example.entity;
+package com.example.topic.model;
+
+import com.example.entity.Subtopic;
 
 import javax.persistence.*;
 import java.util.List;

@@ -1,7 +1,6 @@
-package com.example.entity;
+package com.example.tag.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Tags {

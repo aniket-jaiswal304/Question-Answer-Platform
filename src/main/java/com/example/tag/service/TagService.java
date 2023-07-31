@@ -1,7 +1,7 @@
-package com.example.service;
+package com.example.tag.service;
 
-import com.example.dao.TagsDaoI;
-import com.example.entity.Tags;
+import com.example.tag.dao.TagsDaoI;
+import com.example.tag.model.Tags;
 import com.example.model.TagInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -4,6 +4,8 @@ import com.example.company.model.Company;
 import com.example.dao.*;
 import com.example.entity.*;
 import com.example.model.*;
+import com.example.topic.dao.TopicDaoI;
+import com.example.topic.model.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

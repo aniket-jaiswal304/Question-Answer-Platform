@@ -3,6 +3,8 @@ package com.example;
 import com.example.company.service.CompanyService;
 import com.example.model.*;
 import com.example.service.*;
+import com.example.tag.service.TagService;
+import com.example.topic.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
