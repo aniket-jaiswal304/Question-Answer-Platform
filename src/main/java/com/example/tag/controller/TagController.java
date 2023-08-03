@@ -1,6 +1,6 @@
 package com.example.tag.controller;
 
-import com.example.model.TagInfo;
+import com.example.tag.model.Tags;
 import com.example.tag.service.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +16,13 @@ public class TagController {
     ITagService tagService;
 
     @GetMapping("/tag")
-    public List<TagInfo> retrieveAllTags()
+    public List<Tags> retrieveAllTags()
     {
         return tagService.retrieveAllTags();
     }
 
     @GetMapping("/tag/{tagId}")
-    public TagInfo retrieveTag(@PathVariable int tagId)
+    public Tags retrieveTag(@PathVariable int tagId)
     {
         return tagService.retrieveTag(tagId);
     }
@@ -34,13 +34,13 @@ public class TagController {
     }
 
     @PostMapping("/tag")
-    public int createTag(@RequestBody TagInfo tag)
+    public int createTag(@RequestBody Tags tag)
     {
         return tagService.createTag(tag);
     }
 
     @PutMapping("/tag/{tagId}")
-    public void updateTag(@PathVariable int tagId, @RequestBody TagInfo tag)
+    public void updateTag(@PathVariable int tagId, @RequestBody Tags tag)
     {
         tagService.updateTag(tagId, tag);
     }

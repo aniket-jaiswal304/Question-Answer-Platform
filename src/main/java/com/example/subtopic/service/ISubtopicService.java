@@ -1,6 +1,5 @@
 package com.example.subtopic.service;
 
-import com.example.model.SubtopicInfo;
 import com.example.subtopic.dao.SubtopicDaoI;
 import com.example.subtopic.model.Subtopic;
 import com.example.topic.dao.TopicDaoI;
@@ -13,13 +12,13 @@ import java.util.Optional;
 
 public interface ISubtopicService {
 
-    public List<SubtopicInfo> retrieveAllSubtopics();
+    public List<Subtopic> retrieveAllSubtopics();
 
-    public SubtopicInfo retrieveSubtopic(int subtopicId);
+    public Subtopic retrieveSubtopic(int subtopicId);
 
     public void deleteSubtopic(int subtopicId);
 
-    public int createSubtopic(int topicId, SubtopicInfo subtopicInfo);
+    public int createSubtopic(int topicId, Subtopic subtopic);
 
-    public void updateSubtopic(int subtopicId, SubtopicInfo subtopicInfo);
+    public void updateSubtopic(int subtopicId, Subtopic subtopic);
 }

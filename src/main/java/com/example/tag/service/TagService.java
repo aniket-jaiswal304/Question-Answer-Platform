@@ -2,7 +2,6 @@ package com.example.tag.service;
 
 import com.example.tag.dao.ITagsDao;
 import com.example.tag.model.Tags;
-import com.example.model.TagInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,25 +15,19 @@ public class TagService implements ITagService {
     @Autowired
     ITagsDao tagsDao;
 
-    public List<TagInfo> retrieveAllTags()
+    public List<Tags> retrieveAllTags()
     {
         List<Tags> tags = tagsDao.findAll();
 
-        List<TagInfo> tagInfoList = new ArrayList<>();
 
-        for (Tags tag : tags)
-        {
-            TagInfo tagInfo = new TagInfo(tag.getTagId(), tag.getTag());
-            tagInfoList.add(tagInfo);
-        }
-        return tagInfoList;
+        return tags;
     }
 
-    public TagInfo retrieveTag(int tagId)
+    public Tags retrieveTag(int tagId)
     {
         Optional<Tags> tagsOptional = tagsDao.findById(tagId);
         Tags tag = tagsOptional.get();
-        return new TagInfo(tag.getTagId(), tag.getTag());
+        return tag;
     }
 
     public void deleteTag(int tagId)
@@ -42,17 +35,14 @@ public class TagService implements ITagService {
         tagsDao.deleteById(tagId);
     }
 
-    public int createTag(TagInfo tagInfo)
+    public int createTag(Tags tag)
     {
-        Tags tag = new Tags(tagInfo.getTagId(), tagInfo.getTag());
         tagsDao.save(tag);
         return tag.getTagId();
     }
 
-    public void updateTag(int tagId, TagInfo tagInfo)
+    public void updateTag(int tagId, Tags tag)
     {
-        Tags tag = new Tags(tagInfo.getTagId(), tagInfo.getTag());
-        tag.setTagId(tagId);
         tagsDao.save(tag);
     }
 }

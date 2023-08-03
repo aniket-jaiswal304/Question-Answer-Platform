@@ -1,6 +1,6 @@
 package com.example.question.controller;
 
-import com.example.model.QuestionInfo;
+import com.example.question.model.Question;
 import com.example.question.service.IQuestionService;
 import com.example.question.service.QuestionService;
 import com.example.service.QuestionLikeService;
@@ -18,13 +18,13 @@ public class QuestionController {
     QuestionLikeService questionLikeService;
 
     @PostMapping("/users/{userId}/questions")
-    public int createQuestion(@PathVariable int userId, @RequestBody QuestionInfo questionInfo)
+    public int createQuestion(@PathVariable int userId, @RequestBody Question question)
     {
-        return questionService.createQuestion(userId, questionInfo);
+        return questionService.createQuestion(userId, question);
     }
 
     @GetMapping("/question/{questionId}")
-    public QuestionInfo getQuestion(@PathVariable int questionId)
+    public Question getQuestion(@PathVariable int questionId)
     {
         return questionService.getQuestion(questionId);
     }

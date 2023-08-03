@@ -1,7 +1,7 @@
 package com.example.comment.service;
 
-import com.example.model.CommentInfo;
+import com.example.comment.model.Comment;
 
 public interface ICommentService {
-    public int createComment(int userId, int answerId, CommentInfo commentInfo);
+    public int createComment(int userId, int answerId, Comment comment);
 }

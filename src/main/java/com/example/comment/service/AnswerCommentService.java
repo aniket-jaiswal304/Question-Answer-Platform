@@ -6,7 +6,6 @@ import com.example.user.dao.IUserDao;
 import com.example.answer.model.Answer;
 import com.example.comment.model.Comment;
 import com.example.user.model.User;
-import com.example.model.CommentInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +23,7 @@ public class AnswerCommentService implements ICommentService {
     @Autowired
     IAnswerDao IAnswerDao;
 
-    public int createComment(int userId, int answerId, CommentInfo commentInfo)
+    public int createComment(int userId, int answerId, Comment comment)
     {
         Optional<User> userOptional = userDao.findById(userId);
         User user = userOptional.get();
@@ -33,12 +32,9 @@ public class AnswerCommentService implements ICommentService {
         Optional<Answer> answerOptional = IAnswerDao.findById(answerId);
         Answer answer = answerOptional.get();
 
-
-        Comment commentEntity = new Comment(commentInfo.getCommentId(), commentInfo.getComment(), answer, user);
-
         //save answer to the database
-        answerCommentsDao.save(commentEntity);
+        answerCommentsDao.save(comment);
 
-        return  commentEntity.getCommentId();
+        return  comment.getCommentId();
     }
 }

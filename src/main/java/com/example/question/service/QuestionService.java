@@ -7,7 +7,6 @@ import com.example.company.dao.ICompanyDao;
 import com.example.company.model.Company;
 import com.example.dao.*;
 import com.example.entity.*;
-import com.example.model.*;
 import com.example.question.dao.QuestionDaoI;
 import com.example.question.model.Question;
 import com.example.subtopic.dao.SubtopicDaoI;
@@ -56,27 +55,27 @@ public class QuestionService {
     @Autowired
     AnswerLikesDaoI answerLikesDao;
 
-    public int createQuestion(int userId, QuestionInfo questionInfo)
+    public int createQuestion(int userId, Question question)
     {
         Optional<User> userOptional = userDao.findById(userId);
         User user = userOptional.get();
 
         Subtopic subtopic = new Subtopic();
-        subtopic.setSubtopicId(questionInfo.getSubtopicId());
+        subtopic.setSubtopicId(question.getSubtopicId());
         Optional<Subtopic> subtopicOptional = subtopicDao.findById(subtopic.getSubtopicId());
 
-        Question question = new Question(questionInfo.getQuestionId(), questionInfo.getQuestion(), subtopic, user);
-        question = questionDao.save(question);
+        /*Question question = new Question(question.getQuestionId(), question.getQuestion(), subtopic, user);
+        question = questionDao.save(question);*/
 
         QuestionCompanyMapping questionCompanyMapping = new QuestionCompanyMapping();
         questionCompanyMapping.setQuestionId(question.getQuestionId());
-        questionCompanyMapping.setCompanyId(questionInfo.getCompanyId());
+        questionCompanyMapping.setCompanyId(question.getCompanyId());
 
         questionCompanyMappingDao.save(questionCompanyMapping);
 
         QuestionTags questionTags = new QuestionTags();
         questionTags.setQuestionId(question.getQuestionId());
-        questionTags.setTag(questionInfo.getTag());
+        questionTags.setTag(question.getTag());
 
         questionTagsDao.save(questionTags);
 
@@ -84,35 +83,32 @@ public class QuestionService {
     }
 
 
-    public QuestionInfo getQuestion(int questionId)
+    public Question getQuestion(int questionId)
     {
-        Optional<Question> questionOptional = questionDao.findById(questionId);
+        /*Optional<Question> questionOptional = questionDao.findById(questionId);
         Question question = questionOptional.get();
 
 
-        List<AnswerInfo> answerInfoList = new ArrayList<AnswerInfo>();
+        List<Answer> answerInfoList = new ArrayList<>();
         for (Answer answer : question.getAnswers())
         {
 
-            AnswerInfo answerInfo = new AnswerInfo(answer.getAnswerId(), answer.getAnswer());
-
             List<Comment> commentOptional = answerCommentsDao.findAll();
-            List<CommentInfo> comments = new ArrayList<CommentInfo>();
+            List<Comment> comments = new ArrayList<Comment>();
             for (Comment comment : commentOptional)
             {
-                if (comment.getAnswer().getAnswerId() == answerInfo.getAnswerId())
+                if (comment.getAnswer().getAnswerId() == answer.getAnswerId())
                 {
-                    CommentInfo commentInfo = new CommentInfo(comment.getCommentId(), comment.getComment());
-                    comments.add(commentInfo);
+                    comments.add(comment);
                 }
             }
 
             Long answerLikes = answerLikesDao.count();
 
-            answerInfo.setComments(comments);
-            answerInfo.setAnswerLikes(answerLikes);
+            answer.setComments(comments);
+            answer.setAnswerLikes(answerLikes);
 
-            answerInfoList.add(answerInfo);
+            answerInfoList.add(answer);
         }
 
         Long questionLikes = questionLikesDao.count();
@@ -135,6 +131,7 @@ public class QuestionService {
         TopicInfo topicInfo = new TopicInfo(topic.getTopicId(), topic.getTopic(), subtopicInfo);
 
         QuestionInfo questionInfo = new QuestionInfo(questionId, question.getQuestion(),questionLikes, answerInfoList, companyInfo, questionTags.getTag(), topicInfo);
-        return questionInfo;
+        return questionInfo;*/
+        return null;
     }
 }

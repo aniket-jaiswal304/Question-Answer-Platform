@@ -1,6 +1,6 @@
 package com.example.subtopic.controller;
 
-import com.example.model.SubtopicInfo;
+import com.example.subtopic.model.Subtopic;
 import com.example.subtopic.service.ISubtopicService;
 import com.example.subtopic.service.SubtopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +16,13 @@ public class SubtopicController {
     ISubtopicService subtopicService;
 
     @GetMapping("/subtopic")
-    public List<SubtopicInfo> retrieveAllSubtopics()
+    public List<Subtopic> retrieveAllSubtopics()
     {
         return subtopicService.retrieveAllSubtopics();
     }
 
     @GetMapping("/subtopic/{subtopicId}")
-    public SubtopicInfo retrieveSubtopic(@PathVariable int subtopicId)
+    public Subtopic retrieveSubtopic(@PathVariable int subtopicId)
     {
         return subtopicService.retrieveSubtopic(subtopicId);
     }
@@ -34,14 +34,14 @@ public class SubtopicController {
     }
 
     @PostMapping("/topic/{topicId}/subtopic")
-    public int createSubtopic(@PathVariable int topicId, @RequestBody SubtopicInfo subtopicInfo)
+    public int createSubtopic(@PathVariable int topicId, @RequestBody Subtopic subtopic)
     {
-        return subtopicService.createSubtopic(topicId, subtopicInfo);
+        return subtopicService.createSubtopic(topicId, subtopic);
     }
 
     @PutMapping("subtopic/{subtopicId}")
-    public void updateSubtopic(@PathVariable int subtopicId, @RequestBody SubtopicInfo subtopicInfo)
+    public void updateSubtopic(@PathVariable int subtopicId, @RequestBody Subtopic subtopic)
     {
-        subtopicService.updateSubtopic(subtopicId, subtopicInfo);
+        subtopicService.updateSubtopic(subtopicId, subtopic);
     }
 }

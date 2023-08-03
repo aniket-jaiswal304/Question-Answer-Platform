@@ -4,7 +4,6 @@ import com.example.subtopic.dao.SubtopicDaoI;
 import com.example.topic.dao.TopicDaoI;
 import com.example.subtopic.model.Subtopic;
 import com.example.topic.model.Topic;
-import com.example.model.SubtopicInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,25 +19,18 @@ public class SubtopicService implements ISubtopicService  {
     @Autowired
     TopicDaoI topicDao;
 
-    public List<SubtopicInfo> retrieveAllSubtopics()
+    public List<Subtopic> retrieveAllSubtopics()
     {
         List<Subtopic> subtopics = subtopicDao.findAll();
 
-        List<SubtopicInfo> subtopicInfoList = new ArrayList<SubtopicInfo>();
-
-        for (Subtopic subtopic : subtopics)
-        {
-            SubtopicInfo subtopicInfo = new SubtopicInfo(subtopic.getSubtopicId(), subtopic.getsubtopic());
-            subtopicInfoList.add(subtopicInfo);
-        }
-        return subtopicInfoList;
+        return subtopics;
     }
 
-    public SubtopicInfo retrieveSubtopic(int subtopicId)
+    public Subtopic retrieveSubtopic(int subtopicId)
     {
         Optional<Subtopic> subtopicOptional = subtopicDao.findById(subtopicId);
         Subtopic subtopic = subtopicOptional.get();
-        return new SubtopicInfo(subtopic.getSubtopicId(), subtopic.getsubtopic());
+        return subtopic;
     }
 
     public void deleteSubtopic(int subtopicId)
@@ -46,12 +38,10 @@ public class SubtopicService implements ISubtopicService  {
         subtopicDao.deleteById(subtopicId);
     }
 
-    public int createSubtopic(int topicId, SubtopicInfo subtopicInfo)
+    public int createSubtopic(int topicId, Subtopic subtopic)
     {
         Optional<Topic> topicOptional = topicDao.findById(topicId);
         Topic topic = topicOptional.get();
-
-        Subtopic subtopic = new Subtopic(subtopicInfo.getSubtopicId(), subtopicInfo.getSubtopic());
 
         subtopic.setTopic(topic);
         subtopicDao.save(subtopic);
@@ -59,9 +49,8 @@ public class SubtopicService implements ISubtopicService  {
         return subtopic.getSubtopicId();
     }
 
-    public void updateSubtopic(int subtopicId, SubtopicInfo subtopicInfo)
+    public void updateSubtopic(int subtopicId, Subtopic subtopic)
     {
-        Subtopic subtopic = new Subtopic(subtopicInfo.getSubtopicId(), subtopicInfo.getSubtopic());
         subtopic.setSubtopicId(subtopicId);
         subtopicDao.save(subtopic);
     }

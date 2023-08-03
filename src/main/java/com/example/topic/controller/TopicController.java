@@ -1,6 +1,6 @@
 package com.example.topic.controller;
 
-import com.example.model.TopicInfo;
+import com.example.topic.model.Topic;
 import com.example.topic.service.ITopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +15,13 @@ public class TopicController {
     ITopicService topicService;
 
     @GetMapping("/topic")
-    public List<TopicInfo> retrieveAllTopics()
+    public List<Topic> retrieveAllTopics()
     {
         return topicService.retrieveAllTopics();
     }
 
     @GetMapping("/topic/{topicId}")
-    public TopicInfo retrieveTopic(@PathVariable int topicId)
+    public Topic retrieveTopic(@PathVariable int topicId)
     {
         return topicService.retrieveTopic(topicId);
     }
@@ -33,14 +33,14 @@ public class TopicController {
     }
 
     @PostMapping("/topic")
-    public int createTopic(@RequestBody TopicInfo topicInfo)
+    public int createTopic(@RequestBody Topic topic)
     {
-        return topicService.createTopic(topicInfo);
+        return topicService.createTopic(topic);
     }
 
     @PutMapping("/topic/{topicId}")
-    public void updateTopic(@PathVariable int topicId, @RequestBody TopicInfo topicInfo)
+    public void updateTopic(@PathVariable int topicId, @RequestBody Topic topic)
     {
-        topicService.updateTopic(topicId, topicInfo);
+        topicService.updateTopic(topicId, topic);
     }
 }

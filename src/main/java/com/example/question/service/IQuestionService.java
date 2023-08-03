@@ -1,9 +1,9 @@
 package com.example.question.service;
 
-import com.example.model.*;
+import com.example.question.model.Question;
 
 public interface IQuestionService {
-    public int createQuestion(int userId, QuestionInfo questionInfo);
+    public int createQuestion(int userId, Question question);
 
-    public QuestionInfo getQuestion(int questionId);
+    public Question getQuestion(int questionId);
 }
