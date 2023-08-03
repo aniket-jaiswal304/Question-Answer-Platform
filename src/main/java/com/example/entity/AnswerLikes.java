@@ -1,5 +1,8 @@
 package com.example.entity;
 
+import com.example.answer.model.Answer;
+import com.example.user.model.User;
+
 import javax.persistence.*;
 
 @Entity

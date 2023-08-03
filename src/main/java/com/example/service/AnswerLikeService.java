@@ -1,11 +1,11 @@
 package com.example.service;
 
-import com.example.dao.AnswerDaoI;
+import com.example.answer.dao.IAnswerDao;
 import com.example.dao.AnswerLikesDaoI;
-import com.example.dao.UserDaoI;
-import com.example.entity.Answer;
+import com.example.user.dao.IUserDao;
+import com.example.answer.model.Answer;
 import com.example.entity.AnswerLikes;
-import com.example.entity.User;
+import com.example.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +18,10 @@ public class AnswerLikeService {
     AnswerLikesDaoI answerLikesDaoI;
 
     @Autowired
-    UserDaoI userDao;
+    IUserDao userDao;
 
     @Autowired
-    AnswerDaoI answerDao;
+    IAnswerDao IAnswerDao;
 
     public void createAnswerLike(int userId, int answerId)
     {
@@ -32,7 +32,7 @@ public class AnswerLikeService {
 
         answerLike.setUser(user);
 
-        Optional<Answer> answerOptional = answerDao.findById(answerId);
+        Optional<Answer> answerOptional = IAnswerDao.findById(answerId);
         Answer answer= answerOptional.get();
 
         answerLike.setAnswer(answer);

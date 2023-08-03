@@ -1,6 +1,6 @@
 package com.example.tag.service;
 
-import com.example.tag.dao.TagsDaoI;
+import com.example.tag.dao.ITagsDao;
 import com.example.tag.model.Tags;
 import com.example.model.TagInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TagService {
+public class TagService implements ITagService {
 
     @Autowired
-    TagsDaoI tagsDao;
+    ITagsDao tagsDao;
 
     public List<TagInfo> retrieveAllTags()
     {

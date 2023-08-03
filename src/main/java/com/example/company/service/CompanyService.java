@@ -1,7 +1,7 @@
 package com.example.company.service;
 
+import com.example.company.dao.ICompanyDao;
 import com.example.company.model.Company;
-import com.example.model.CompanyInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,31 +10,24 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CompanyService {
+public class CompanyService implements ICompanyService {
 
     @Autowired
-    CompanyDaoI companyDao;
+    ICompanyDao companyDao;
 
-    public List<CompanyInfo> retrieveAllCompanies()
+    public List<Company> getAllCompanies()
     {
         List<Company> companies = companyDao.findAll();
 
-        List<CompanyInfo> companyInfoList = new ArrayList<CompanyInfo>();
-
-        for (Company company : companies)
-        {
-            CompanyInfo companyInfo = new CompanyInfo(company.getCompanyId(), company.getCompanyName());
-            companyInfoList.add(companyInfo);
-        }
-        return companyInfoList;
+        return companies;
     }
 
-    public CompanyInfo retrieveCompany(int companyId)
+    public Company getCompany(int companyId)
     {
         Optional<Company> companyOptional = companyDao.findById(companyId);
         Company company = companyOptional.get();
 
-        return new CompanyInfo(company.getCompanyId(), company.getCompanyName());
+        return company;
     }
 
     public void deleteCompany(int companyId)
@@ -42,17 +35,14 @@ public class CompanyService {
         companyDao.deleteById(companyId);
     }
 
-    public int createCompany(CompanyInfo companyInfo)
+    public int addCompany(Company company)
     {
-        Company company = new Company(companyInfo.getCompanyId(), companyInfo.getCompanyName());
         companyDao.save(company);
         return company.getCompanyId();
     }
 
-    public void updateCompany(int companyId, CompanyInfo companyInfo)
+    public void updateCompany(Company company)
     {
-        Company company = new Company(companyInfo.getCompanyId(), companyInfo.getCompanyName());
-        company.setCompanyId(companyId);
         companyDao.save(company);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.topic.service;
 
 import com.example.topic.dao.TopicDaoI;
-import com.example.entity.Subtopic;
+import com.example.subtopic.model.Subtopic;
 import com.example.topic.model.Topic;
 import com.example.model.SubtopicInfo;
 import com.example.model.TopicInfo;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TopicService {
+public class TopicService implements ITopicService {
 
     @Autowired
     TopicDaoI topicDao;

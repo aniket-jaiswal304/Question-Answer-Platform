@@ -1,21 +1,22 @@
-package com.example.service;
+package com.example.answer.service;
 
+import com.example.answer.dao.IAnswerDao;
 import com.example.question.dao.QuestionDaoI;
-import com.example.dao.QuestionLikesDaoI;
 import com.example.user.dao.IUserDao;
+import com.example.answer.model.Answer;
 import com.example.question.model.Question;
-import com.example.entity.QuestionLikes;
 import com.example.user.model.User;
+import com.example.model.AnswerInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class QuestionLikeService {
+public class AnswerService implements IAnswerService {
 
     @Autowired
-    QuestionLikesDaoI questionLikesDao;
+    IAnswerDao IAnswerDao;
 
     @Autowired
     IUserDao userDao;
@@ -23,21 +24,19 @@ public class QuestionLikeService {
     @Autowired
     QuestionDaoI questionDao;
 
-    public void createQuestionLike(int userId, int questionId)
+    @Override
+    public int createAnswer(int userId, int questionId, AnswerInfo answerInfo)
     {
         Optional<User> userOptional = userDao.findById(userId);
         User user = userOptional.get();
 
-        QuestionLikes questionLike = new QuestionLikes();
-
-        questionLike.setUser(user);
-
         Optional<Question> questionOptional = questionDao.findById(questionId);
         Question question = questionOptional.get();
 
-        //map the question to the answer
-        questionLike.setQuestion(question);
+        Answer answer = new Answer(answerInfo.getAnswerId(), answerInfo.getAnswer(), question, user);
 
-        questionLikesDao.save(questionLike);
+        IAnswerDao.save(answer);
+
+        return answer.getAnswerId();
     }
 }
