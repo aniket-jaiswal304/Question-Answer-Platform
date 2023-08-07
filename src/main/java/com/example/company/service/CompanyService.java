@@ -5,7 +5,6 @@ import com.example.company.model.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +16,8 @@ public class CompanyService implements ICompanyService {
 
     public List<Company> getAllCompanies()
     {
-        List<Company> companies = companyDao.findAll();
+        List<Company> companies;
+        companies = companyDao.findAll();
 
         return companies;
     }
@@ -25,24 +25,30 @@ public class CompanyService implements ICompanyService {
     public Company getCompany(int companyId)
     {
         Optional<Company> companyOptional = companyDao.findById(companyId);
-        Company company = companyOptional.get();
-
-        return company;
+        return companyOptional.orElse(null);
     }
 
-    public void deleteCompany(int companyId)
+    public boolean deleteCompany(int companyId)
     {
-        companyDao.deleteById(companyId);
+        if(companyDao.findById(companyId).isPresent()) {
+            companyDao.deleteById(companyId);
+            return true;
+        }
+
+        return false;
     }
 
-    public int addCompany(Company company)
+    public Company addCompany(Company company)
     {
-        companyDao.save(company);
-        return company.getCompanyId();
+        return companyDao.save(company);
     }
 
-    public void updateCompany(Company company)
+    public Company updateCompany(Company company)
     {
-        companyDao.save(company);
+        if(companyDao.findById(company.getCompanyId()).isPresent()) {
+            return companyDao.save(company);
+        }
+
+        return null;
     }
 }

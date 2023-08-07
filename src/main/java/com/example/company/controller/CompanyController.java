@@ -3,14 +3,9 @@ package com.example.company.controller;
 import com.example.company.model.Company;
 import com.example.company.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,27 +17,46 @@ public class CompanyController {
     ICompanyService companyService;
 
     @GetMapping(value = "/get-companies")
-    public List<Company> getAllCompanies() {
-        return companyService.getAllCompanies();
+    public ResponseEntity<List<Company>> getAllCompanies() {
+        return ResponseEntity.ok().body(companyService.getAllCompanies());
     }
 
     @GetMapping(value = "/get-company/{companyId}")
-    public Company getCompany(@PathVariable int companyId) {
-        return companyService.getCompany(companyId);
-    }
+    public ResponseEntity<Company> getCompany(@PathVariable int companyId) {
+        if(companyId <= 0)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-    @DeleteMapping(value = "/delete-company/{companyId}")
-    public void deleteCompany(@PathVariable int companyId) {
-        companyService.deleteCompany(companyId);
+        Company company = companyService.getCompany(companyId);
+
+        return ResponseEntity.ok().body(company);
     }
 
     @PostMapping(value = "/add-company")
-    public int createCompany(@RequestBody Company company) {
-        return companyService.addCompany(company);
+    public ResponseEntity<Company> createCompany(@RequestBody Company company) {
+        return ResponseEntity.ok().body(companyService.addCompany(company));
+    }
+
+    @DeleteMapping(value = "/delete-company/{companyId}")
+    public ResponseEntity<String> deleteCompany(@PathVariable int companyId) {
+        if(companyId <= 0)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        if(companyService.deleteCompany(companyId))
+            return new ResponseEntity<>(HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping(value = "/update-company")
-    public void updateCompany(@RequestBody Company company) {
-        companyService.updateCompany(company);
+    public ResponseEntity<Company> updateCompany(@RequestBody Company company) {
+        if(company.getCompanyId() <= 0)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        company = companyService.updateCompany(company);
+        if(company != null)
+            return ResponseEntity.ok().body(company);
+        else
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
     }
 }

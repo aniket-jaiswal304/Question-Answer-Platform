@@ -9,9 +9,9 @@ public interface ICompanyService {
 
     public Company getCompany(int companyId);
 
-    public void deleteCompany(int companyId);
+    public boolean deleteCompany(int companyId);
 
-    public int addCompany(Company company);
+    public Company addCompany(Company company);
 
-    public void updateCompany(Company company);
+    public Company updateCompany(Company company);
 }
