@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<start-class>com.example.app.QuestionAnswerApplication</start-class>
+		<start-class>com.example.QuestionAnswerApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -31,10 +31,21 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -56,22 +67,13 @@
 	</dependencies>
 
 	<build>
-		<finalName>Question-Answer</finalName>
+		<finalName>Question-Answer-Platform</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.1</version>
-				<configuration>
-					<url>http://localhost:8080/question-answer</url>
-					<server>mytomcat</server>
-					<path>/question-answer</path>
-				</configuration>
-			</plugin>
+
 		</plugins>
 	</build>
 

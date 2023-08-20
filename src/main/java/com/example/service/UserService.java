@@ -1,12 +1,13 @@
 package com.example.service;
 
-import com.example.daointerface.QuestionTagsDaoI;
+import com.example.daointerface.IUserDao;
+import com.example.serviceinterface.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class QuestionTagService {
+public class UserService implements IUserService {
 
     @Autowired
-    QuestionTagsDaoI questionTagsDao;
+    IUserDao userDao;
 }

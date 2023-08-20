@@ -1,7 +1,7 @@
 package com.example.entity;
 
-import com.example.answer.model.Answer;
-import com.example.user.model.User;
+import com.example.model.Answer;
+import com.example.model.User;
 
 import javax.persistence.*;
 
